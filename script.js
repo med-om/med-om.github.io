@@ -13,7 +13,7 @@ const alhijri = document.getElementById('al-Hijri');
 
 function prayerTimes(){
 
-	axios.get('http://api.aladhan.com/v1/calendar/2024/5?latitude=33.9715904&longitude=-6.8498129&method=2')
+	axios.get('http://api.aladhan.com/v1/calendar/2024/5?latitude=35.7806&longitude=-5.8136&method=99&methodSettings=19,null,17')
 	  .then(function (response) {
 		// handle success
 		
