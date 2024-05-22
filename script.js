@@ -12,7 +12,6 @@ const alhijri = document.getElementById('al-Hijri');
 
 
 function prayerTimes(){
-
 	axios.get('http://api.aladhan.com/v1/calendar/2024/5?latitude=35.7806&longitude=-5.8136&method=99&methodSettings=19,null,17')
 	  .then(function (response) {
 		// handle success
@@ -53,5 +52,30 @@ function prayerTimes(){
 
 }
 
-prayerTimes();
+function getPTMonth(){
+axios.get('http://api.aladhan.com/v1/calendar/2024/5?latitude=35.7806&longitude=-5.8136&method=99&methodSettings=19,null,17')
+	  .then(function (response) {
+		// handle success
+		
+		let ptMonth = response.data;
+		console.log(ptMonth);
+		
+		let dt = new Date();
 
+		let dtarray = ptMonth.data[0]; // first month
+		console.log(dtarray); // first day
+
+		
+	  })
+	  .catch(function (error) {
+		// handle error
+		console.log(error);
+	  })
+	  .finally(function () {
+		// always executed
+	  });
+
+}
+
+prayerTimes();
+getPTMonth();
