@@ -1,5 +1,8 @@
 'use strict';
 
+const almiladi = document.getElementById('al-Miladi');
+const alhijri = document.getElementById('al-Hijri');
+
 let alSabah = document.getElementById('sabah');
 let alChorok = document.getElementById('chorok');
 let alDohr = document.getElementById('dohr');
@@ -7,19 +10,21 @@ let alAsr = document.getElementById('asr');
 let alMaghrib = document.getElementById('maghrib');
 let alIsha = document.getElementById('isha');
 
-const almiladi = document.getElementById('al-Miladi');
-const alhijri = document.getElementById('al-Hijri');
+const titlePTM = document.getElementById('titlePTM');
+const tblMonthMiladi = document.getElementById('tblMonthMiladi');
+const tblMonthHijri = document.getElementById('tblMonthHijri');
 
 const tptm = document.querySelector('.table_ptm');
 const tth = document.querySelector('.table_th');
 
-
+const gregorianMonths = ['يناير','فبراير','مارس','أبريل','ماي','يونيو','يوليوز','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر']
 
 
 //methodSettings : FajrAngle,MaghribAngleOrMinsAfterSunset,IshaAngleOrMinsAfterMaghrib
 //tune : Imsak,Fajr,Sunrise,Dhuhr,Asr,Maghrib,Sunset,Isha,Midnight
 
 let url = `http://api.aladhan.com/v1/calendar/${new Date().getFullYear()}/${new Date().getMonth()+1}?latitude=35.7806&longitude=-5.8136&method=99&methodSettings=17.2,1.5,16.5&tune=0,0,6,9.2,0.5,0,0,0,0`;
+
 
 
 function prayerTimes(url){
@@ -64,9 +69,6 @@ function prayerTimes(url){
 
 }
 
-const tblMonthMiladi = document.getElementById('tblMonthMiladi');
-const tblMonthHijri = document.getElementById('tblMonthHijri');
-
 function getPTMonth(url){
 
 	axios.get(url)
@@ -78,9 +80,11 @@ function getPTMonth(url){
 		let dates, timings;
 
 		//console.log(ptday);
+		
+		titlePTM.innerHTML = `${gregorianMonths[new Date().getMonth()] +' '+new Date().getFullYear()}`;
 
 		// Edit Month Miladi and Hijri in the table by attr id
-		tblMonthMiladi.innerHTML = ptday[0].date.gregorian.month.en;
+		tblMonthMiladi.innerHTML = gregorianMonths[new Date().getMonth()];
 		tblMonthHijri.innerHTML = ptday[0].date.hijri.month.ar+'/'+ptday[ptday.length-1].date.hijri.month.ar;
 
 
