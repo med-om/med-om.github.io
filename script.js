@@ -91,6 +91,12 @@ function getPTMonth(url){
 			timings = dt.timings
 
 			let tr = document.createElement('tr');
+			
+			
+			if(new Date().getDate() === Number(dates.gregorian.day)){
+				tr.setAttribute("class","table-warning");
+			}
+
 			tptm.appendChild(tr);
 
 			// tth is number of tags <th> in table
