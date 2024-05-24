@@ -14,9 +14,17 @@ const tptm = document.querySelector('.table_ptm');
 const tth = document.querySelector('.table_th');
 
 
-function prayerTimes(){
 
-	axios.get(`http://api.aladhan.com/v1/calendar/${new Date().getFullYear()}/${new Date().getMonth()+1}?latitude=35.7806&longitude=-5.8136&method=99&methodSettings=19,null,17`)
+
+//methodSettings : FajrAngle,MaghribAngleOrMinsAfterSunset,IshaAngleOrMinsAfterMaghrib
+//tune : Imsak,Fajr,Sunrise,Dhuhr,Asr,Maghrib,Sunset,Isha,Midnight
+
+let url = `http://api.aladhan.com/v1/calendar/${new Date().getFullYear()}/${new Date().getMonth()+1}?latitude=35.7806&longitude=-5.8136&method=99&methodSettings=17.2,1.5,16.5&tune=0,0,6,9.2,0.5,0,0,0,0`;
+
+
+function prayerTimes(url){
+
+	axios.get(url)
 	  .then(function (response) {
 		// handle success
 		
@@ -59,9 +67,9 @@ function prayerTimes(){
 const tblMonthMiladi = document.getElementById('tblMonthMiladi');
 const tblMonthHijri = document.getElementById('tblMonthHijri');
 
-function getPTMonth(){
+function getPTMonth(url){
 
-	axios.get(`http://api.aladhan.com/v1/calendar/${new Date().getFullYear()}/${new Date().getMonth()+1}?latitude=35.7806&longitude=-5.8136&method=99&methodSettings=19,null,17`)
+	axios.get(url)
 	  .then(function (response) {
 		// handle success
 		
@@ -140,7 +148,7 @@ function getPTMonth(){
 
 }
 
-prayerTimes();
-getPTMonth();
+prayerTimes(url);
+getPTMonth(url);
 
 
