@@ -32,22 +32,25 @@ function prayerTimes(url){
 	  .then(function (response) {
 		// handle success
 		
-		let prayerTimes = response.data;
+		const prayerTimes = response.data;
 		//console.log(prayerTimes);
 		
-		let dt = new Date();
+		const date = new Date();
 
 		// Get Dates from API for Miladi and Hijri
-		let dates = prayerTimes.data[dt.getDate()-1].date;
+		let datesMiladi = prayerTimes.data[date.getDate()-1].date;
+
+		//Note : (-2) this is about Hijri months 29 or 30
+		let datesHijri = prayerTimes.data[date.getDate()-2].date;
 		//console.log(dates);
 
 		// Get Timings for Prayer times
-		let timings = prayerTimes.data[dt.getDate()-1].timings;
+		let timings = prayerTimes.data[date.getDate()-1].timings;
 		//console.log(timings);
 
 		// show Today's date
-		almiladi.innerHTML = dates.gregorian.date;
-		alhijri.innerHTML = dates.hijri.date;
+		almiladi.innerHTML = datesMiladi.gregorian.date;
+		alhijri.innerHTML = datesHijri.hijri.date;
 
 		// show Prayer times
 		alSabah.innerHTML = timings.Fajr.slice(0, 5);
@@ -74,27 +77,25 @@ function getPTMonth(url){
 	  .then(function (response) {
 		// handle success
 		
-		let ptMonth = response.data;
-		let ptday = ptMonth.data;
+		const ptMonth = response.data;
+		const ptday = ptMonth.data;
 		let dates, timings;
-
-		//console.log(ptday);
 		
 		titlePTM.innerHTML = `${gregorianMonths[new Date().getMonth()] +' '+new Date().getFullYear()}`;
 
 		// Edit Month Miladi and Hijri in the table by attr id
 		tblMonthMiladi.innerHTML = gregorianMonths[new Date().getMonth()];
-		tblMonthHijri.innerHTML = ptday[0].date.hijri.month.ar+'/'+ptday[ptday.length-1].date.hijri.month.ar;
+		
+		// Note : this API don't support our country in Hijri Months
+		//tblMonthHijri.innerHTML = ptday[0].date.hijri.month.ar+'/'+ptday[ptday.length-1].date.hijri.month.ar; 
 
-
-		for(let dt of ptday){
+		for(let day of ptday){
 
 			// Get Dates and Times from API for Miladi and Hijri
-			dates = dt.date;
-			timings = dt.timings
+			dates = day.date;
+			timings = day.timings;
 
 			let tr = document.createElement('tr');
-			
 			
 			if(new Date().getDate() === Number(dates.gregorian.day)){
 				tr.setAttribute("class","table-warning");
@@ -117,25 +118,25 @@ function getPTMonth(url){
 					case "PTM2":
 						td.appendChild(document.createTextNode(Number(dates.gregorian.day)))
 						break;
+					// case "PTM3":
+					// 	td.appendChild(document.createTextNode(Number(dates.hijri.day)))
+					// 	break;
 					case "PTM3":
-						td.appendChild(document.createTextNode(Number(dates.hijri.day)))
-						break;
-					case "PTM4":
 						td.appendChild(document.createTextNode(timings.Fajr.slice(0, 5)))
 						break;
-					case "PTM5":
+					case "PTM4":
 						td.appendChild(document.createTextNode(timings.Sunrise.slice(0, 5)))
 						break;
-					case "PTM6":
+					case "PTM5":
 						td.appendChild(document.createTextNode(timings.Dhuhr.slice(0, 5)))
 						break;
-					case "PTM7":
+					case "PTM6":
 						td.appendChild(document.createTextNode(timings.Asr.slice(0, 5)))
 						break;
-					case "PTM8":
+					case "PTM7":
 						td.appendChild(document.createTextNode(timings.Maghrib.slice(0, 5)))
 						break;
-					case "PTM9":
+					case "PTM8":
 						td.appendChild(document.createTextNode(timings.Isha.slice(0, 5)))
 
 				}
@@ -159,5 +160,4 @@ function getPTMonth(url){
 
 prayerTimes(url);
 getPTMonth(url);
-
 
