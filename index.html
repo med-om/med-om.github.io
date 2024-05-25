@@ -28,22 +28,25 @@
 </head>
 <body>
     <div class="content">
-        <div class="titlePrayerTimes"><h3>مواقيت الصلاة</h3></div>
-        <div class="ShowTodaysDate">
-            <span>اليوم : <span id="al-Miladi"></span></span>
-            <span>الموافق ل : <span id="al-Hijri"></span></span>
+        <div class="headerPrayerTimes">
+            <div class="titlePrayerTimes"><h3>مواقيت الصلاة</h3></div>
+            <hr>
+            <div class="ShowTodaysDate">
+                <span>اليوم : <span id="al-Miladi"></span></span>
+                <span>الموافق ل : <span id="al-Hijri"></span></span>
+            </div>
+            <div class="showPrayerTimes">
+                <div class="al-sabah">الصباح <h6 id="sabah"></h6></div>
+                <div class="al-chorok">الشروق <h6 id="chorok"></h6></div>
+                <div class="al-dohr">الظهر <h6 id="dohr"></h6></div>
+                <div class="al-asr">العصر <h6 id="asr"></h6></div>
+                <div class="al-maghrib">المغرب <h6 id="maghrib"></h6></div>
+                <div class="al-icha">العشاء <h6 id="isha"></h6></div>
+            </div>
+            <div class="notePTMonth"><h5>حصة الصلاة الخاصة بمدينة طنجة بتوقيت GMT+1</h5></div>
         </div>
-        <div class="showPrayerTimes">
-            <div class="al-sabah">الصباح : <span id="sabah"></span></div>
-            <div class="al-chorok">الشروق : <span id="chorok"></span></div>
-            <div class="al-dohr">الظهر : <span id="dohr"></span></div>
-            <div class="al-asr">العصر : <span id="asr"></span></div>
-            <div class="al-maghrib">المغرب : <span id="maghrib"></span></div>
-            <div class="al-icha">العشاء : <span id="isha"></span></div>
-        </div>
-        <hr>
         <div class="showPTMonth">
-	<div class="titlePTMonth"><h5>تقويم أوقات صلاة الشهر: <span id="titlePTM"></span></h5></div>
+	    <div class="titlePTMonth"><h4>تقويم أوقات صلاة الشهر: <span id="titlePTM"></span></h4></div>
             <table class="table table-hover">
                 <thead>
                     <tr class="table_th table-dark">

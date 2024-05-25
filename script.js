@@ -51,13 +51,13 @@ function prayerTimes(url){
 		alhijri.innerHTML = dates.hijri.date;
 
 		// show Prayer times
-		alSabah.innerHTML = timings.Fajr;
-		alChorok.innerHTML = timings.Sunrise;
-		alDohr.innerHTML = timings.Dhuhr;
-		alAsr.innerHTML = timings.Asr;
-		alMaghrib.innerHTML = timings.Maghrib;
-		alIsha.innerHTML = timings.Isha;
-		
+		alSabah.innerHTML = timings.Fajr.slice(0, 5);
+		alChorok.innerHTML = timings.Sunrise.slice(0, 5);
+		alDohr.innerHTML = timings.Dhuhr.slice(0, 5);
+		alAsr.innerHTML = timings.Asr.slice(0, 5);
+		alMaghrib.innerHTML = timings.Maghrib.slice(0, 5);
+		alIsha.innerHTML = timings.Isha.slice(0, 5);
+
 	  })
 	  .catch(function (error) {
 		// handle error
@@ -122,22 +122,22 @@ function getPTMonth(url){
 						td.appendChild(document.createTextNode(dates.hijri.day))
 						break;
 					case "PTM4":
-						td.appendChild(document.createTextNode(timings.Fajr))
+						td.appendChild(document.createTextNode(timings.Fajr.slice(0, 5)))
 						break;
 					case "PTM5":
-						td.appendChild(document.createTextNode(timings.Sunrise))
+						td.appendChild(document.createTextNode(timings.Sunrise.slice(0, 5)))
 						break;
 					case "PTM6":
-						td.appendChild(document.createTextNode(timings.Dhuhr))
+						td.appendChild(document.createTextNode(timings.Dhuhr.slice(0, 5)))
 						break;
 					case "PTM7":
-						td.appendChild(document.createTextNode(timings.Asr))
+						td.appendChild(document.createTextNode(timings.Asr.slice(0, 5)))
 						break;
 					case "PTM8":
-						td.appendChild(document.createTextNode(timings.Maghrib))
+						td.appendChild(document.createTextNode(timings.Maghrib.slice(0, 5)))
 						break;
 					case "PTM9":
-						td.appendChild(document.createTextNode(timings.Isha))
+						td.appendChild(document.createTextNode(timings.Isha.slice(0, 5)))
 
 				}
 				

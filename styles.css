@@ -8,40 +8,49 @@
 }
 
 .content{
-    width: 80%;
+    width: 70%;
     margin: 0 auto;
+}
+
+.headerPrayerTimes{
+    background-color: #EF9D05;
+    color: white;
 }
 
 .titlePrayerTimes{
     text-align: center;
-    padding: 10px;
+    padding: 15px 0px 0px 0px;
     font-size: 25px;
-    background-color: #EF9D05;
-    color: white;
 }
 
-.ShowTodaysDate{
+.ShowTodaysDate, .notePTMonth{
     text-align: center;
-    padding: 5px;
+    padding: 10px 0px;
     font-size: 22px;
-    background-color: #EF9D05;
-    color: white;
 }
+
 .showPrayerTimes{
     display: flex;
-	background-color: #EF9D05;
-	padding: 10px;
+    color: black;
+	padding: 5px;
 }
+
+.showPrayerTimes h6{
+    padding: 10px 0px 0px 0px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
 
 .showPrayerTimes div{
     background-color: white;
     flex: 1;
     margin: 5px;
-    min-height: 50px;
+    min-height: 80px;
 	padding: 5px;
     text-align: center;
     align-content: center;
-    border-radius: 10px;
+    border-radius: 20px;
     border: 1px solid #e49400;
 	font-weight: bold;
 	transition: 0.5s ease;
@@ -49,29 +58,43 @@
 
 .showPrayerTimes div:hover{
     background-color: #EF9D05;
-    color: white;
     border: 1px solid #704902;
-    font-weight: bold;
+}
+
+.showPTMonth{
+    margin-top: 30px;
 }
 
 .titlePTMonth{
     text-align: center;
-	padding: 5px;
+	padding: 20px 0px;
+    
 }
 
 @media (max-width: 950px) {
+    .content{
+        /* content connect with width of the table bootstrap */ 
+        min-width: 600px;
+    }
     .showPrayerTimes div{
 	height: auto;
 	padding: 5px;
 	margin: 2px;
     }
-    .titlePTMonth h5{
+
+    .ShowTodaysDate{
+        font-size: 20px;
+    }
+
+    .notePTMonth h5{
+        font-size: 16px;
+        
+    }
+
+    .titlePTMonth{
+        padding: 10px 0px;
+    }
+    .titlePTMonth h4{
 	font-size: 20px;
     }
-}
-
-@media (max-width: 600px) {
-  .content{
-    width: 85%;
-  }
 }
