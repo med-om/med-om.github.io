@@ -23,8 +23,7 @@ const gregorianMonths = ['يناير','فبراير','مارس','أبريل','م
 //methodSettings : FajrAngle,MaghribAngleOrMinsAfterSunset,IshaAngleOrMinsAfterMaghrib
 //tune : Imsak,Fajr,Sunrise,Dhuhr,Asr,Maghrib,Sunset,Isha,Midnight
 
-let url = `http://api.aladhan.com/v1/calendar/${new Date().getFullYear()}/${new Date().getMonth()+1}?latitude=35.7806&longitude=-5.8136&method=99&methodSettings=17.2,1.5,16.5&tune=0,0,6,9.2,0.5,0,0,0,0`;
-
+let url = `http://api.aladhan.com/v1/calendar/${new Date().getFullYear()}/${new Date().getMonth()+1}?latitude=35.7806&longitude=-5.8136&method=99&methodSettings=17.2,1.5,16.5&tune=0,0,5.8,9.4,0.8,0,0,0,0`;
 
 
 function prayerTimes(url){
@@ -116,10 +115,10 @@ function getPTMonth(url){
 						td.appendChild(document.createTextNode(dates.hijri.weekday.ar))
 						break;
 					case "PTM2":
-						td.appendChild(document.createTextNode(dates.gregorian.day))
+						td.appendChild(document.createTextNode(Number(dates.gregorian.day)))
 						break;
 					case "PTM3":
-						td.appendChild(document.createTextNode(dates.hijri.day))
+						td.appendChild(document.createTextNode(Number(dates.hijri.day)))
 						break;
 					case "PTM4":
 						td.appendChild(document.createTextNode(timings.Fajr.slice(0, 5)))
