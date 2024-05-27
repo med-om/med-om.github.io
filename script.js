@@ -23,7 +23,7 @@ const gregorianMonths = ['يناير','فبراير','مارس','أبريل','م
 //methodSettings : FajrAngle,MaghribAngleOrMinsAfterSunset,IshaAngleOrMinsAfterMaghrib
 //tune : Imsak,Fajr,Sunrise,Dhuhr,Asr,Maghrib,Sunset,Isha,Midnight
 
-let url = `http://api.aladhan.com/v1/calendar/${new Date().getFullYear()}/${new Date().getMonth()+1}?latitude=35.7806&longitude=-5.8136&method=99&methodSettings=17.2,1.5,16.5&tune=0,0,5.8,9.4,0.8,0,0,0,0`;
+let url = `http://api.aladhan.com/v1/calendar/${new Date().getFullYear()}/${new Date().getMonth()+1}?latitude=35.7806&longitude=-5.8136&method=99&methodSettings=19.1,1.7,17&tune=0,0,-4.5,5,0.5,0,0,0,0`;
 
 
 function prayerTimes(url){
