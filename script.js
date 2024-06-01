@@ -33,20 +33,19 @@ function prayerTimes(url){
 		// handle success
 		
 		const prayerTimes = response.data;
-		//console.log(prayerTimes);
+		const pttoday = prayerTimes.data;
+		//console.log(pttoday);
 		
 		const date = new Date();
 
 		// Get Dates from API for Miladi and Hijri
-		let datesMiladi = prayerTimes.data[date.getDate()-1].date;
+		let datesMiladi = pttoday[date.getDate()-1].date;
 
 		//Note : (-2) this is about Hijri months 29 or 30
-		let datesHijri = prayerTimes.data[date.getDate()-2].date;
-		//console.log(dates);
+		let datesHijri = pttoday[date.getDate()-1].date;
 
 		// Get Timings for Prayer times
-		let timings = prayerTimes.data[date.getDate()-1].timings;
-		//console.log(timings);
+		let timings = pttoday[date.getDate()-1].timings;
 
 		// show Today's date
 		almiladi.innerHTML = datesMiladi.gregorian.date;
