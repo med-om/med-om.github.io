@@ -15,7 +15,7 @@ const tblMonthMiladi = document.getElementById('tblMonthMiladi');
 const tblMonthHijri = document.getElementById('tblMonthHijri');
 
 const tptm = document.querySelector('.table_ptm');
-const tth = document.querySelector('.table_th');
+const tcol = document.querySelector('.table_col');
 
 const gregorianMonths = ['يناير','فبراير','مارس','أبريل','ماي','يونيو','يوليوز','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر']
 
@@ -26,7 +26,7 @@ const gregorianMonths = ['يناير','فبراير','مارس','أبريل','م
 let url = `http://api.aladhan.com/v1/calendar/${new Date().getFullYear()}/${new Date().getMonth()+1}?latitude=35.7806&longitude=-5.8136&method=99&methodSettings=19.1,1.7,17&tune=0,0,-4.5,5,0.5,0,0,0,0`;
 
 
-function prayerTimes(url){
+function getPTToday(url){
 
 	axios.get(url)
 	  .then(function (response) {
@@ -39,17 +39,14 @@ function prayerTimes(url){
 		const date = new Date();
 
 		// Get Dates from API for Miladi and Hijri
-		let datesMiladi = pttoday[date.getDate()-1].date;
-
-		//Note : (-2) this is about Hijri months 29 or 30
-		let datesHijri = pttoday[date.getDate()-1].date;
+		let dates = pttoday[date.getDate()-1].date;
 
 		// Get Timings for Prayer times
 		let timings = pttoday[date.getDate()-1].timings;
 
-		// show Today's date
-		almiladi.innerHTML = datesMiladi.gregorian.date;
-		alhijri.innerHTML = datesHijri.hijri.date;
+		// Show Today's date
+		almiladi.innerHTML = dates.gregorian.date;
+		alhijri.innerHTML = dates.hijri.date;
 
 		// show Prayer times
 		alSabah.innerHTML = timings.Fajr.slice(0, 5);
@@ -78,35 +75,35 @@ function getPTMonth(url){
 		
 		const ptMonth = response.data;
 		const ptday = ptMonth.data;
-		let dates, timings;
 		
+		// Show Month and Year
 		titlePTM.innerHTML = `${gregorianMonths[new Date().getMonth()] +' '+new Date().getFullYear()}`;
 
 		// Edit Month Miladi and Hijri in the table by attr id
 		tblMonthMiladi.innerHTML = gregorianMonths[new Date().getMonth()];
-		
-		// Note : this API don't support our country in Hijri Months
+
 		//tblMonthHijri.innerHTML = ptday[0].date.hijri.month.ar+'/'+ptday[ptday.length-1].date.hijri.month.ar; 
+		// Note : this API don't support our country in Hijri Months
 
 		for(let day of ptday){
 
 			// Get Dates and Times from API for Miladi and Hijri
-			dates = day.date;
-			timings = day.timings;
+			let dates = day.date;
+			let timings = day.timings;
 
-			let tr = document.createElement('tr');
+			const tr = document.createElement('tr');
 			
+			// Select the day of Today in table
 			if(new Date().getDate() === Number(dates.gregorian.day)){
 				tr.setAttribute("class","table-warning");
 			}
 
 			tptm.appendChild(tr);
 
-			// tth is number of tags <th> in table
-			for(let j=1; j<=tth.childElementCount; j++){
-
-				let td = document.createElement('td');
-			
+			// The number of columns in this table
+			for(let j=1; j<=tcol.childElementCount; j++){
+				
+				const td = document.createElement('td');
 				td.setAttribute("id","PTM"+j);
 
 				let checkID = "PTM"+j;
@@ -141,10 +138,8 @@ function getPTMonth(url){
 				}
 				
 				tr.appendChild(td);
-
 			}
 		}
-
 		
 	  })
 	  .catch(function (error) {
@@ -157,6 +152,6 @@ function getPTMonth(url){
 
 }
 
-prayerTimes(url);
+getPTToday(url);
 getPTMonth(url);
 
