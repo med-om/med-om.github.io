@@ -57,8 +57,8 @@
 }
 
 .showPrayerTimes div:hover{
-    background-color: #EF9D05;
-    border: 1px solid #704902;
+    background-color: #212529;
+    color: white;
 }
 
 .showPTMonth{
@@ -70,6 +70,11 @@
 	padding: 20px 0px;
     
 }
+
+.table-center{
+    text-align: center;
+}
+
 
 @media (max-width: 950px) {
     .content{

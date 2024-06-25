@@ -81,9 +81,7 @@ function getPTMonth(url){
 
 		// Edit Month Miladi and Hijri in the table by attr id
 		tblMonthMiladi.innerHTML = gregorianMonths[new Date().getMonth()];
-
-		//tblMonthHijri.innerHTML = ptday[0].date.hijri.month.ar+'/'+ptday[ptday.length-1].date.hijri.month.ar; 
-		// Note : this API don't support our country in Hijri Months
+		tblMonthHijri.innerHTML = ptday[0].date.hijri.month.ar+' / '+ptday[ptday.length-1].date.hijri.month.ar; 
 
 		for(let day of ptday){
 
@@ -114,25 +112,25 @@ function getPTMonth(url){
 					case "PTM2":
 						td.appendChild(document.createTextNode(Number(dates.gregorian.day)))
 						break;
-					// case "PTM3":
-					// 	td.appendChild(document.createTextNode(Number(dates.hijri.day)))
-					// 	break;
 					case "PTM3":
-						td.appendChild(document.createTextNode(timings.Fajr.slice(0, 5)))
+						td.appendChild(document.createTextNode(Number(dates.hijri.day)))
 						break;
 					case "PTM4":
-						td.appendChild(document.createTextNode(timings.Sunrise.slice(0, 5)))
+						td.appendChild(document.createTextNode(timings.Fajr.slice(0, 5)))
 						break;
 					case "PTM5":
-						td.appendChild(document.createTextNode(timings.Dhuhr.slice(0, 5)))
+						td.appendChild(document.createTextNode(timings.Sunrise.slice(0, 5)))
 						break;
 					case "PTM6":
-						td.appendChild(document.createTextNode(timings.Asr.slice(0, 5)))
+						td.appendChild(document.createTextNode(timings.Dhuhr.slice(0, 5)))
 						break;
 					case "PTM7":
-						td.appendChild(document.createTextNode(timings.Maghrib.slice(0, 5)))
+						td.appendChild(document.createTextNode(timings.Asr.slice(0, 5)))
 						break;
 					case "PTM8":
+						td.appendChild(document.createTextNode(timings.Maghrib.slice(0, 5)))
+						break;
+					case "PTM9":
 						td.appendChild(document.createTextNode(timings.Isha.slice(0, 5)))
 
 				}
