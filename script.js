@@ -15,12 +15,10 @@ const citiesSelect = document.getElementById('cities-select');
 const titlePTM = document.getElementById('titlePTM');
 const tblMonthMiladi = document.getElementById('tblMonthMiladi');
 const tblMonthHijri = document.getElementById('tblMonthHijri');
-
 const tptm = document.querySelector('.table_ptm');
 const tcol = document.querySelector('.table_col');
 
 const gregorianMonths = ['يناير','فبراير','مارس','أبريل','ماي','يونيو','يوليوز','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-
 const cities = [
 	{
 	nameAR : 'أكادير',
@@ -142,7 +140,6 @@ citiesSelect.addEventListener('change',function (){
 	tptm.textContent = '';
 
 	let cityName = '';
-
 	for (let city of cities){
 		if (this.value == city.nameAR){
 			cityName = city.name;
@@ -163,7 +160,7 @@ function getPTToday(cityName){
 		country : "MA",
 		city : cityName
 		};
-	
+
 	axios.get("http://api.aladhan.com/v1/timingsByCity", {
 		params: params
 		})
@@ -208,7 +205,6 @@ function getPTMonth(cityName){
 		country : "MA",
 		city : cityName
 		};
-
 
 	axios.get(`http://api.aladhan.com/v1/calendarByCity/${new Date().getFullYear()}/${new Date().getMonth()+1}`, {
 		params: params
