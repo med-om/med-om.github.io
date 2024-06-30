@@ -3,12 +3,14 @@
 const almiladi = document.getElementById('al-Miladi');
 const alhijri = document.getElementById('al-Hijri');
 
-let alSabah = document.getElementById('sabah');
-let alChorok = document.getElementById('chorok');
-let alDohr = document.getElementById('dohr');
-let alAsr = document.getElementById('asr');
-let alMaghrib = document.getElementById('maghrib');
-let alIsha = document.getElementById('isha');
+const alSabah = document.getElementById('sabah');
+const alChorok = document.getElementById('chorok');
+const alDohr = document.getElementById('dohr');
+const alAsr = document.getElementById('asr');
+const alMaghrib = document.getElementById('maghrib');
+const alIsha = document.getElementById('isha');
+
+const citiesSelect = document.getElementById('cities-select');
 
 const titlePTM = document.getElementById('titlePTM');
 const tblMonthMiladi = document.getElementById('tblMonthMiladi');
@@ -17,44 +19,177 @@ const tblMonthHijri = document.getElementById('tblMonthHijri');
 const tptm = document.querySelector('.table_ptm');
 const tcol = document.querySelector('.table_col');
 
-const gregorianMonths = ['يناير','فبراير','مارس','أبريل','ماي','يونيو','يوليوز','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر']
+const gregorianMonths = ['يناير','فبراير','مارس','أبريل','ماي','يونيو','يوليوز','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
+
+const cities = [
+	{
+	nameAR : 'أكادير',
+	name : "Agadir-Ida-Ou-Tanane"
+	},
+	{
+	nameAR : 'الحسيمة',
+	name : "Al Hoceïma"
+	},
+	{
+	nameAR : 'الدار البيضاء',
+	name : "Casablanca"
+	},
+	{
+	nameAR : 'شفشاون',
+	name : "Chefchaouen"
+	},
+	{
+	nameAR : 'الداخلة',
+	name : "Dakhla"
+	},
+	{
+	nameAR : 'الجديدة',
+	name : "El Jadida"
+	},
+	{
+	nameAR : 'الراشيدية',
+	name : "Errachidia"
+	},
+	{
+	nameAR : 'الصويرة',
+	name : "Essaouira"
+	},
+	{
+	nameAR : 'فاس',
+	name : "Fès"
+	},
+	{
+	nameAR : 'القنيطرة',
+	name : "Kénitra"
+	},
+	{
+	nameAR : 'خريبكة',
+	name : "Khouribga"
+	},
+	{
+	nameAR : 'العيون',
+	name : "Laâyoune"
+	},
+	{
+	nameAR : 'العرائش',
+	name : "Larache"
+	},
+	{
+	nameAR : 'مراكش',
+	name : "Marrakech"
+	},
+	{
+	nameAR : 'مكناس',
+	name : "Meknès"
+	},
+	{
+	nameAR : 'الناظور',
+	name : "Nador"
+	},
+	{
+	nameAR : 'ورزازات',
+	name : "Ouarzazate"
+	},
+	{
+	nameAR : 'وجدة',
+	name : "Oujda-Angad"
+	},
+	{
+	nameAR : 'الرباط',
+	name : "Rabat"
+	},
+	{
+	nameAR : 'آسفي',
+	name : "Safi"
+	},
+	{
+	nameAR : 'طنجة',
+	name : "Tanger-Assilah"
+	},
+	{
+	nameAR : 'طرفاية',
+	name : "Tarfaya"
+	},
+	{
+	nameAR : 'تازة',
+	name : "Taza"
+	},
+	{
+	nameAR : 'تطوان',
+	name : "Tétouan"
+	},
+	{
+	nameAR : 'زاكورة',
+	name : "Zagora"
+	}
+];
+
+for (let city of cities){
+
+	if(city.name == "Tanger-Assilah"){
+		const content = `<option selected>${city.nameAR}</option>`
+		citiesSelect.innerHTML += content; 
+	}else
+	{
+		const content = `<option>${city.nameAR}</option>`
+		citiesSelect.innerHTML += content; 
+	}
+}
+
+citiesSelect.addEventListener('change',function (){
+
+	// remove the old content in the table
+	tptm.textContent = '';
+
+	let cityName = '';
+
+	for (let city of cities){
+		if (this.value == city.nameAR){
+			cityName = city.name;
+		}
+	}
+
+	// Show Prayer times for Today
+	getPTToday(cityName);
+
+	// Show Prayer times for Month
+	getPTMonth(cityName);
+});
 
 
-//methodSettings : FajrAngle,MaghribAngleOrMinsAfterSunset,IshaAngleOrMinsAfterMaghrib
-//tune : Imsak,Fajr,Sunrise,Dhuhr,Asr,Maghrib,Sunset,Isha,Midnight
+function getPTToday(cityName){
 
-let url = `http://api.aladhan.com/v1/calendar/${new Date().getFullYear()}/${new Date().getMonth()+1}?latitude=35.7806&longitude=-5.8136&method=99&methodSettings=19.1,1.7,17&tune=0,0,-4.5,5,0.5,0,0,0,0`;
-
-
-function getPTToday(url){
-
-	axios.get(url)
-	  .then(function (response) {
+	const params = {
+		country : "MA",
+		city : cityName
+		};
+	
+	axios.get("http://api.aladhan.com/v1/timingsByCity", {
+		params: params
+		})
+		.then(function (response) {
 		// handle success
 		
-		const prayerTimes = response.data;
-		const pttoday = prayerTimes.data;
+		const pttoday = response.data.data;
 		//console.log(pttoday);
 		
-		const date = new Date();
-
 		// Get Dates from API for Miladi and Hijri
-		let dates = pttoday[date.getDate()-1].date;
+		let dates = pttoday.date;
 
 		// Get Timings for Prayer times
-		let timings = pttoday[date.getDate()-1].timings;
+		let timings = pttoday.timings;
 
 		// Show Today's date
 		almiladi.innerHTML = dates.gregorian.date;
 		alhijri.innerHTML = dates.hijri.date;
 
 		// show Prayer times
-		alSabah.innerHTML = timings.Fajr.slice(0, 5);
-		alChorok.innerHTML = timings.Sunrise.slice(0, 5);
-		alDohr.innerHTML = timings.Dhuhr.slice(0, 5);
-		alAsr.innerHTML = timings.Asr.slice(0, 5);
-		alMaghrib.innerHTML = timings.Maghrib.slice(0, 5);
-		alIsha.innerHTML = timings.Isha.slice(0, 5);
+		alSabah.innerHTML = timings.Fajr;
+		alChorok.innerHTML = timings.Sunrise;
+		alDohr.innerHTML = timings.Dhuhr;
+		alAsr.innerHTML = timings.Asr;
+		alMaghrib.innerHTML = timings.Maghrib;
+		alIsha.innerHTML = timings.Isha;
 
 	  })
 	  .catch(function (error) {
@@ -67,14 +202,22 @@ function getPTToday(url){
 
 }
 
-function getPTMonth(url){
+function getPTMonth(cityName){
 
-	axios.get(url)
+	const params = {
+		country : "MA",
+		city : cityName
+		};
+
+
+	axios.get(`http://api.aladhan.com/v1/calendarByCity/${new Date().getFullYear()}/${new Date().getMonth()+1}`, {
+		params: params
+		})
 	  .then(function (response) {
 		// handle success
-		
-		const ptMonth = response.data;
-		const ptday = ptMonth.data;
+
+		const ptday = response.data.data;
+		//console.log(ptday);
 		
 		// Show Month and Year
 		titlePTM.innerHTML = `${gregorianMonths[new Date().getMonth()] +' '+new Date().getFullYear()}`;
@@ -132,7 +275,6 @@ function getPTMonth(url){
 						break;
 					case "PTM9":
 						td.appendChild(document.createTextNode(timings.Isha.slice(0, 5)))
-
 				}
 				
 				tr.appendChild(td);
@@ -150,6 +292,6 @@ function getPTMonth(url){
 
 }
 
-getPTToday(url);
-getPTMonth(url);
+getPTToday("Tanger-Assilah");
+getPTMonth("Tanger-Assilah");
 

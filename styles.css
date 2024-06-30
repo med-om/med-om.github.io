@@ -29,9 +29,23 @@
     font-size: 22px;
 }
 
+.notePTMonth select{
+    font-size: 20px;
+    background: none;
+    color: white;
+    border: 1px white solid;
+    border-radius: 10px;
+    padding: 0px 5px;
+    outline:0px;
+}
+
+.notePTMonth option{
+    background-color: #212529;
+}
+
 .showPrayerTimes{
     display: flex;
-    color: black;
+    color:#212529;
 	padding: 5px;
 }
 
@@ -91,9 +105,8 @@
         font-size: 20px;
     }
 
-    .notePTMonth h5{
+    .notePTMonth span{
         font-size: 16px;
-        
     }
 
     .titlePTMonth{
