@@ -11,116 +11,13 @@ const alMaghrib = document.getElementById('maghrib');
 const alIsha = document.getElementById('isha');
 
 const citiesSelect = document.getElementById('cities-select');
-
 const titlePTM = document.getElementById('titlePTM');
 const tblMonthMiladi = document.getElementById('tblMonthMiladi');
 const tblMonthHijri = document.getElementById('tblMonthHijri');
 const tptm = document.querySelector('.table_ptm');
 const tcol = document.querySelector('.table_col');
 
-const gregorianMonths = ['يناير','فبراير','مارس','أبريل','ماي','يونيو','يوليوز','أغسطس','سبتمبر','أكتوبر','نوفمبر','ديسمبر'];
-const cities = [
-	{
-	nameAR : 'أكادير',
-	name : "Agadir-Ida-Ou-Tanane"
-	},
-	{
-	nameAR : 'الحسيمة',
-	name : "Al Hoceïma"
-	},
-	{
-	nameAR : 'الدار البيضاء',
-	name : "Casablanca"
-	},
-	{
-	nameAR : 'شفشاون',
-	name : "Chefchaouen"
-	},
-	{
-	nameAR : 'الداخلة',
-	name : "Dakhla"
-	},
-	{
-	nameAR : 'الجديدة',
-	name : "El Jadida"
-	},
-	{
-	nameAR : 'الراشيدية',
-	name : "Errachidia"
-	},
-	{
-	nameAR : 'الصويرة',
-	name : "Essaouira"
-	},
-	{
-	nameAR : 'فاس',
-	name : "Fès"
-	},
-	{
-	nameAR : 'القنيطرة',
-	name : "Kénitra"
-	},
-	{
-	nameAR : 'خريبكة',
-	name : "Khouribga"
-	},
-	{
-	nameAR : 'العيون',
-	name : "Laâyoune"
-	},
-	{
-	nameAR : 'العرائش',
-	name : "Larache"
-	},
-	{
-	nameAR : 'مراكش',
-	name : "Marrakech"
-	},
-	{
-	nameAR : 'مكناس',
-	name : "Meknès"
-	},
-	{
-	nameAR : 'الناظور',
-	name : "Nador"
-	},
-	{
-	nameAR : 'ورزازات',
-	name : "Ouarzazate"
-	},
-	{
-	nameAR : 'وجدة',
-	name : "Oujda-Angad"
-	},
-	{
-	nameAR : 'الرباط',
-	name : "Rabat"
-	},
-	{
-	nameAR : 'آسفي',
-	name : "Safi"
-	},
-	{
-	nameAR : 'طنجة',
-	name : "Tanger-Assilah"
-	},
-	{
-	nameAR : 'طرفاية',
-	name : "Tarfaya"
-	},
-	{
-	nameAR : 'تازة',
-	name : "Taza"
-	},
-	{
-	nameAR : 'تطوان',
-	name : "Tétouan"
-	},
-	{
-	nameAR : 'زاكورة',
-	name : "Zagora"
-	}
-];
+const citySelected = "Tanger-Assilah"; // default city
 
 for (let city of cities){
 
@@ -288,6 +185,6 @@ function getPTMonth(cityName){
 
 }
 
-getPTToday("Tanger-Assilah");
-getPTMonth("Tanger-Assilah");
+getPTToday(citySelected);
+getPTMonth(citySelected);
 
