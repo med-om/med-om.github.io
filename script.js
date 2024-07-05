@@ -21,7 +21,7 @@ const citySelected = "Tanger-Assilah"; // default city
 
 for (let city of cities){
 
-	if(city.name == "Tanger-Assilah"){
+	if(city.name == citySelected){
 		const content = `<option selected>${city.nameAR}</option>`
 		citiesSelect.innerHTML += content; 
 	}else
